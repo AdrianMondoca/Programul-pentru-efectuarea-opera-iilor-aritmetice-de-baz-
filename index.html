@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Simplu</title>
+</head>
+<body>
+    <h1>Calculator Simplu</h1>
+    <form id="calculatorForm">
+        <label for="firstNumber">Primul număr:</label>
+        <input type="number" id="firstNumber" required><br><br>
+        
+        <label for="operator">Operator (+, -, *, /):</label>
+        <input type="text" id="operator" maxlength="1" required><br><br>
+        
+        <label for="secondNumber">Al doilea număr:</label>
+        <input type="number" id="secondNumber" required><br><br>
+        
+        <button type="button" onclick="calculate()">Calculează</button>
+    </form>
+    
+    <div id="resultModal" style="display: none;">
+        <p id="resultText"></p>
+        <button onclick="closeModal()">Închide</button>
+    </div>
+    
+    <script>
+        function calculate() {
+            const firstNumber = parseFloat(document.getElementById('firstNumber').value);
+            const operator = document.getElementById('operator').value;
+            const secondNumber = parseFloat(document.getElementById('secondNumber').value);
+            let result;
+            
+            switch(operator) {
+                case '+':
+                    result = firstNumber + secondNumber;
+                    break;
+                case '-':
+                    result = firstNumber - secondNumber;
+                    break;
+                case '*':
+                    result = firstNumber * secondNumber;
+                    break;
+                case '/':
+                    if (secondNumber !== 0) {
+                        result = firstNumber / secondNumber;
+                    } else {
+                        result = "Eroare: Împărțirea la zero nu este permisă!";
+                    }
+                    break;
+                default:
+                    result = "Operator invalid!";
+            }
+            
+            document.getElementById('resultText').innerText = "Rezultatul este: " + result;
+            document.getElementById('resultModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('resultModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
